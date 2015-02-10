@@ -210,7 +210,7 @@ if (isset($_POST['actionResponse']))
             if (@mysql_connect($dbInfo['dbHostName'] . ':' . $dbInfo['dbHostPort'], $dbInfo['dbUserName'], $dbInfo['dbPassword'])) {
                 $mysqlHost = mysql_get_server_info();
 
-                if (intval(substr($mysqlHost, 0, 1)) < 4 || substr($mysqlHost, 0, 3) === '4.0')
+                if (intval(substr($mysqlHost, 0, strpos($mysqlHost, '.'))) < 4 || substr($mysqlHost, 0, 3) === '4.0')
                     $error = 'WRONGDBVER';
                 elseif ($_POST['dbCreateMethod'] == 'new' && mysql_select_db($dbInfo['dbName']))
                     $error = 'DBEXISTS';
